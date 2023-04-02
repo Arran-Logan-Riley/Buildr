@@ -4,9 +4,9 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 
 
-function Modal_html(auth,user, firestore) {
-  console.log(user,auth);
-
+function Modal_html(props) {
+  //console.log(props)
+  const dummy = useRef();
   const [showModal, setShowModal] = useState(false);
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
   var handleClose = () => setShowModal(false);
@@ -14,22 +14,35 @@ function Modal_html(auth,user, firestore) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [BOM, setBOM] = useState('');
+  const [materialNum, setMaterialNum] = useState('');
+  const {uid, photoURL} = props.currentUser
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    await auth.firestore.collection("messages").add({
+    await props.firestore.collection("messages").add({
+      createdAt: props.firebase.firestore.FieldValue.serverTimestamp(),
       projectName: formValue,
       startDate: startDate,
       endDate: endDate,
       material: BOM,
+      materialNum: materialNum,
+      uid,
+      photoURL
     });
+    //Set all states to empty
+    setFormValue('');
+    setStartDate('');
+    setEndDate('');
+    setBOM('');
+    setMaterialNum('');
     handleClose(); // close the modal after saving the data
+    dummy.current.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <div>
       <div className="modal-example" onClick={() => setShowModal(true)}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" className="bi bi-plus-circle-fill" viewBox="0 0 16 16">
           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
         </svg>
       </div>
@@ -67,20 +80,20 @@ function Modal_html(auth,user, firestore) {
             <div>
               <label>Name of Material</label>
               <div>
-                <input type={'text'}></input>
+                <input value={BOM} type={'text'} onChange={(e) => setBOM(e.target.value)}></input>
               </div>
             </div>
             <div>
               <label>Number of Material</label>
             </div>
             <div>
-              <input type={'number'}></input>
+              <input value={materialNum} type={'number'} onChange = {(e)=> setMaterialNum(e.target.value)}></input>
             </div>
             <div className="modal-footer">
               <button className="secondary-button" onClick={handleClose}>
                 Close
               </button>
-              <button className="primary-button" onClick={(e) => sendMessage(e, firestore)}>
+              <button className="primary-button" onClick={(e) => sendMessage(e, props.firestore)}>
                 Save Project
               </button>
             </div>
@@ -89,6 +102,5 @@ function Modal_html(auth,user, firestore) {
       </Modal>
     </div>
   )
-}
-
+  }
 export default Modal_html;

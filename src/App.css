@@ -115,7 +115,6 @@ p {
   margin-bottom: 12px;
   line-height: 24px;
   padding: 10px 20px;
-  border-radius: 25px;
   position: relative;
   color: white;
   text-align: center;
@@ -124,32 +123,36 @@ p {
 .message {
   align-items: center;
   max-width: 400px;
- 
+ padding: 30px;
+ margin: 10px;
 }
+
+
 
 .sent {
-}
-
-
-.sent p {
   color: white;
   background: #0b93f6;
   align-self: flex-end;
 }
-.received p {
+.received {
   background: #e5e5ea;
   color: black;
 }
 
 .container{
-  /*display: flex;*/
+  display: flex;
+  flex-wrap: wrap;
 }
+
 
 img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin: 2px 5px;
+}
+.signOutBTN{
+  
 }
 
 .moveLeftToolBar{

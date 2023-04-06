@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 //import component
 import Modal_html from './components/modal';
+import DeleteComp from './components/deleteCardEntryComponent'
+import EditComp from './components/editButtonComp'
 import './App.css';
 //Import both firebase and firestore to comunicate and store information
 import firebase from 'firebase/compat/app';
@@ -94,19 +96,22 @@ function ChatRoom() {
 }
 
 function ChatMessage(props) {
-  const { projectName, startDate, endDate, material, uid, photoURL } = props.messages;
+  const { projectName, startDate, endDate, material, uid, photoURL, msgId } = props.messages;
+
   //Compares the uid of the user and the message to determine if the current user sent the message or not
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
   //console.log(auth.currentUser);
   return (
     <div >
       <ul className={`message ${messageClass}`}>
+        {auth.currentUser && <DeleteComp displayState={`${messageClass}`} auth={auth} firestore={firestore} firebase={firebase} msgId={msgId} uid={uid} currentUser={auth.currentUser.uid}/>}
         <img src={photoURL} />
         <h3>[{projectName}]</h3>
         <li>Start : {startDate}</li>
         <li>End : {endDate}</li>
         <li>Materials needed:</li>
         <li>{material}</li>
+        {auth.currentUser && <EditComp displayState={`${messageClass}`} auth={auth} firestore={firestore} firebase={firebase} msgId={msgId}/>}
       </ul>
     </div>
   )

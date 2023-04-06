@@ -27,7 +27,13 @@ function Modal_html(props) {
       material: BOM,
       materialNum: materialNum,
       uid,
-      photoURL
+      photoURL,
+      msgId: '',
+    }).then((sendObj) =>{
+      //Inline function to creaete msg id from google
+      sendObj.update({
+        msgId: sendObj.id
+      })
     });
     //Set all states to empty
     setFormValue('');
@@ -36,7 +42,7 @@ function Modal_html(props) {
     setBOM('');
     setMaterialNum('');
     handleClose(); // close the modal after saving the data
-    dummy.current.scrollIntoView({ behavior: 'smooth' })
+    //dummy.current.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (

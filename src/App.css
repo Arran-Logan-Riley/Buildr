@@ -112,9 +112,7 @@ ul, li {
 }
 
 p {
-  margin-bottom: 12px;
   line-height: 24px;
-  padding: 10px 20px;
   position: relative;
   color: white;
   text-align: center;
@@ -123,7 +121,10 @@ p {
 .message {
   align-items: center;
   max-width: 400px;
- padding: 30px;
+ padding-left: 30px;
+ padding-right: 30px;
+ padding-bottom: 5px;
+ padding-top: 2px;
  margin: 10px;
 }
 
@@ -276,3 +277,11 @@ button {
   flex-direction: column;
 }
 /*End of CSS code for modal*/
+
+.removeCard{
+  text-align: right;
+}
+
+.editButton{
+  text-align: right;
+}

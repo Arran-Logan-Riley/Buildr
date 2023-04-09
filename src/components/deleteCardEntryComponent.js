@@ -12,7 +12,7 @@ function DeleteComp(props){
                 console.log(error)
             }
         }else{
-            alert('You do not own this message')
+            alert('You do not own this card (ID mismatch)')
         }
     }
     

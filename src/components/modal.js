@@ -10,10 +10,10 @@ function Modal_html(props) {
   const [showModal, setShowModal] = useState(false);
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
   var handleClose = () => setShowModal(false);
-  const [formValue, setFormValue] = useState('');
+  const [projectName, setProjectName] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [BOM, setBOM] = useState('');
+  const [material, setMaterial] = useState('');
   const [materialNum, setMaterialNum] = useState('');
   const {uid, photoURL} = props.currentUser
 
@@ -21,10 +21,10 @@ function Modal_html(props) {
     e.preventDefault();
     await props.firestore.collection("messages").add({
       createdAt: props.firebase.firestore.FieldValue.serverTimestamp(),
-      projectName: formValue,
+      projectName: projectName,
       startDate: startDate,
       endDate: endDate,
-      material: BOM,
+      material: material,
       materialNum: materialNum,
       uid,
       photoURL,
@@ -36,10 +36,10 @@ function Modal_html(props) {
       })
     });
     //Set all states to empty
-    setFormValue('');
+    setProjectName('');
     setStartDate('');
     setEndDate('');
-    setBOM('');
+    setMaterial('');
     setMaterialNum('');
     handleClose(); // close the modal after saving the data
     //dummy.current.scrollIntoView({ behavior: 'smooth' })
@@ -70,7 +70,7 @@ function Modal_html(props) {
           </div>
           <label>Name Of Project</label>
           <form className='modalBoxCreate'>
-            <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
+            <input value={projectName} onChange={(e) => setProjectName(e.target.value)} />
             <div>
               <div>
                 <label>Start Date</label>
@@ -86,7 +86,7 @@ function Modal_html(props) {
             <div>
               <label>Name of Material</label>
               <div>
-                <input value={BOM} type={'text'} onChange={(e) => setBOM(e.target.value)}></input>
+                <input value={material} type={'text'} onChange={(e) => setMaterial(e.target.value)}></input>
               </div>
             </div>
             <div>

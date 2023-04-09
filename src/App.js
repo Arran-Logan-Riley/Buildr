@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import Modal_html from './components/modal';
 import DeleteComp from './components/deleteCardEntryComponent'
 import EditComp from './components/editButtonComp'
+import Settings from './components/Settings'
 import './App.css';
 //Import both firebase and firestore to comunicate and store information
 import firebase from 'firebase/compat/app';
@@ -30,8 +31,9 @@ function App() {
   return (
     <div className='App'>
       <header>
-        <Toolbar/>
+        <Toolbar />
         <SignOut />
+        <Settings/>
       </header>
       <section>
         {user ? <ChatRoom /> : <SignIn />}
@@ -59,14 +61,17 @@ function SignOut() {
   //Check to see if there is a user or not, if there is a user, then it displays the sign out button
   //When a user clicks the button, the auth.signOut() method will be called and the user will be signed out of their current Firebase Authentication session.
   return auth.currentUser && (
-    <button className='signOutBTN' onClick={() => auth.signOut()}>Sign Out</button>
+    <div>
+      <button className='signOutBTN' onClick={() => auth.signOut()}>Sign Out </button>
+    </div>
+
   )
 }
 
 function Toolbar() {
   return (
     <div className='moveLeftToolBar'>
-      {auth.currentUser && <Modal_html auth={auth} firebase={firebase} firestore={firestore} currentUser={auth.currentUser}/>}
+      {auth.currentUser && <Modal_html auth={auth} firebase={firebase} firestore={firestore} currentUser={auth.currentUser} />}
     </div>
   )
 }
@@ -80,10 +85,6 @@ function ChatRoom() {
   //Use the datacollection hook to lsiten a change in the data. Anytime react changes, it will
   // change with the latest data
   const [messages] = useCollectionData(query, { idField: 'id' })
-  //Will receive value from from and set the form value to the formValue variable
-  const [formValue, setFormValue] = useState('');
-  //set uid and photo URL to the current user so this can be accessed in the async method
-  const { uid, photoURL } = auth.currentUser
 
   return (
     <main>
@@ -96,22 +97,21 @@ function ChatRoom() {
 }
 
 function ChatMessage(props) {
-  const { projectName, startDate, endDate, material, uid, photoURL, msgId } = props.messages;
+  const { projectName, startDate, endDate, material, uid, photoURL, msgId, materialNum } = props.messages;
 
   //Compares the uid of the user and the message to determine if the current user sent the message or not
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
-  //console.log(auth.currentUser);
   return (
     <div >
       <ul className={`message ${messageClass}`}>
-        {auth.currentUser && <DeleteComp displayState={`${messageClass}`} auth={auth} firestore={firestore} firebase={firebase} msgId={msgId} uid={uid} currentUser={auth.currentUser.uid}/>}
+        {auth.currentUser && <DeleteComp displayState={`${messageClass}`} auth={auth} firestore={firestore} firebase={firebase} msgId={msgId} uid={uid} currentUser={auth.currentUser.uid} />}
         <img src={photoURL} />
         <h3>[{projectName}]</h3>
         <li>Start : {startDate}</li>
         <li>End : {endDate}</li>
         <li>Materials needed:</li>
-        <li>{material}</li>
-        {auth.currentUser && <EditComp displayState={`${messageClass}`} auth={auth} firestore={firestore} firebase={firebase} msgId={msgId}/>}
+        <li>{material}: {materialNum}</li>
+        {auth.currentUser && <EditComp displayState={`${messageClass}`} auth={auth} firestore={firestore} firebase={firebase} uid={uid} currentUser={auth.currentUser.uid} msgId={msgId} />}
       </ul>
     </div>
   )

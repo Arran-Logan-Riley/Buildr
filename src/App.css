@@ -6,8 +6,12 @@ body {
   margin-left: 100px;
 }
 
+ul {
+  padding-left: 10px;
+}
+
 .App header {
-  background-color: #181717;
+  background-color: #0b1a26;
   height: 10vh;
   min-height: 50px;
   color: white;
@@ -126,6 +130,7 @@ p {
  padding-bottom: 5px;
  padding-top: 2px;
  margin: 10px;
+ border-radius: 25px;
 }
 
 
@@ -162,7 +167,7 @@ img {
  left: 0;
  width: 100px;
  height: 100%;
- background-color: #1e1f22;
+ background-color: #0b1a26;
  padding-top: 10px;
  padding-left: 10px;
 }
@@ -280,8 +285,10 @@ button {
 
 .removeCard{
   text-align: right;
+  cursor: pointer;
 }
 
 .editButton{
   text-align: right;
+  cursor: pointer;
 }

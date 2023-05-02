@@ -7,6 +7,7 @@ Features:
 - Authentication (login/logout)
 - Create, Delete, Edit project data
 - Multiple pop up windows to manipulate data
+- Settings (Work in progress)
 
 
 * User sign in page:
@@ -26,7 +27,7 @@ Features:
 Built in React using:
 - React
 - Firebase
-- Fire Auth
-- Fire Store
+- Firebase Auth
+- Firebase Store
 - React Helmet
 - Modal overlays

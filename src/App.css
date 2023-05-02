@@ -172,21 +172,10 @@ img {
  padding-left: 10px;
 }
 
-.tools{
-
+.appTitle{
+text-align: left;
 }
 
-.createEntry{
-
-}
-
-.editEntry{
-
-}
-
-.deleteEntry{
-
-}
 
 .toolImages{
   width: 50px;

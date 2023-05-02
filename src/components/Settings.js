@@ -1,8 +1,8 @@
-
+import React, { Component, useState, useRef } from 'react';
 
 function Settings(){
     return(
-        <div><h1>Tester</h1></div>
+        <div><button className="settings">Settings</button></div>
         
     )
 }

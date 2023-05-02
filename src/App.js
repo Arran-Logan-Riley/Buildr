@@ -31,8 +31,8 @@ function App() {
   return (
     <div className='App'>
       <header>
-        <Toolbar />
-        <SignOut />
+        <Toolbar/>
+        <SignOut/>
         <Settings/>
       </header>
       <section>

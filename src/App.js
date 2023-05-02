@@ -4,6 +4,7 @@ import Modal_html from './components/modal';
 import DeleteComp from './components/deleteCardEntryComponent'
 import EditComp from './components/editButtonComp'
 import Settings from './components/Settings'
+import { Helmet } from 'react-helmet';
 import './App.css';
 //Import both firebase and firestore to comunicate and store information
 import firebase from 'firebase/compat/app';
@@ -30,6 +31,9 @@ function App() {
   const [user] = useAuthState(auth);
   return (
     <div className='App'>
+      <Helmet>
+        <title>Buildr</title>
+      </Helmet>
       <header>
         <Toolbar/>
         <SignOut/>

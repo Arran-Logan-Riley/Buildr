@@ -7,3 +7,12 @@ Features:
 - Authentication (login/logout)
 - Create, Delete, Edit project data
 - Multiple pop up windows to manipulate data
+- User permission control
+
+Built in React using:
+- React
+- Firebase
+- Fire Auth
+- Fire Store
+- React Helmet
+- Modal overlays

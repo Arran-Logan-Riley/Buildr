@@ -42,7 +42,7 @@ function EditComp(props) {
       >
         <div>
           <div className="modal-header">
-            <div className="modal-title">Create New Building Entry</div>
+            <div className="modal-title">Edit Building Entry</div>
             <div>
               <span className="close-button" onClick={handleClose}>
                 x
